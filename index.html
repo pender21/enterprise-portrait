@@ -215,7 +215,7 @@
       <select class="fld" id="f-rev"><option value="">Prefer not to say</option><option>Under $2M</option><option>$2M – $5M</option><option>$5M – $10M</option><option>$10M – $25M</option><option>$25M – $50M</option><option>$50M+</option></select>
     </div>
     <p class="footnote">You'll speak your answers aloud from here. We listen and write down what you say, then reflect it back &mdash; nothing is recorded on video.</p>
-    <div class="center" style="margin-top:20px"><button class="btn" onclick="go('s-journey')">Continue &nbsp;→</button></div>
+    <div class="center" style="margin-top:20px"><button class="btn" onclick="goToJourney()">Continue &nbsp;→</button></div>
   </div>
 </section>
 
@@ -249,8 +249,8 @@
 <section id="s-loading" class="screen">
   <div class="wrap center">
     <div class="spinner"></div>
-    <p class="lead" style="margin-top:24px">Listening back through everything you shared&hellip;</p>
-    <p class="body muted">Building your story, and the map for your advisor.</p>
+    <p class="lead" style="margin-top:24px">Sending your responses to your Sypnios advisor&hellip;</p>
+    <p class="body muted">Just a moment.</p>
   </div>
 </section>
 
@@ -266,6 +266,9 @@
     <div style="border:1px solid rgba(139,184,74,0.5);background:rgba(139,184,74,0.08);padding:24px 28px;margin-top:30px;text-align:left">
       <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:12px">Your Sypnios Advisor Has Received Your Response</div>
       <p style="font-size:14px;line-height:1.85;color:#43413b;font-weight:300;margin:0">Your Portrait responses have been shared with your Sypnios advisor. As an additional safeguard for your own records, you may save a printed copy using the button below.</p>
+    </div>
+    <div id="submit-warning" style="display:none;border:1px solid rgba(201,145,95,0.5);background:rgba(201,145,95,0.08);padding:20px 24px;margin-top:16px;text-align:left">
+      <p style="font-size:13.5px;line-height:1.7;color:#7a5230;margin:0">We were unable to confirm delivery to your advisor just now. Please use the Save / Print button below to keep a copy, and let your advisor know directly just in case.</p>
     </div>
 
     <div class="quote center" style="max-width:560px;margin:32px auto">"Thank you for the courage it took to answer honestly. What you have shared here is not just information, it is the beginning of the plan to grow this business, or to prepare it for exit, for everything it is worth."</div>
@@ -636,15 +639,125 @@ function bandFor(x){
   return "Early";
 }
 
-function finish(){
-  go('s-readout');
+// ============================================================
+// FORMSPREE SUBMISSION
+// Replace YOUR_FORM_ID below with the endpoint Formspree gives you
+// when you create the form, e.g. https://formspree.io/f/abcdwxyz
+// ============================================================
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/meajyzko';
+
+function submitStarted(){
+  const company = (document.getElementById('f-company').value||'').trim();
+  if(!company) return; // nothing worth notifying on yet
+  const role = document.getElementById('f-role').value||'';
+  const years = document.getElementById('f-years').value||'';
+  const rev = document.getElementById('f-rev').value||'';
+  // Fire and forget, don't hold up navigation waiting on this
+  fetch(FORMSPREE_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      _subject: `Enterprise Portrait STARTED: ${company}`,
+      status: 'Started, not yet completed',
+      company: company,
+      role: role,
+      years_leading: years,
+      revenue_range: rev
+    })
+  }).catch(e => console.error('Formspree start-notification error:', e));
 }
 
-function printTranscript(){
+function goToJourney(){
+  submitStarted();
+  go('s-journey');
+}
+
+function buildPlainTextTranscript(){
   const company = (document.getElementById('f-company').value||'').trim() || 'The Business';
   const role = document.getElementById('f-role').value||'';
   const years = document.getElementById('f-years').value||'';
   const rev = document.getElementById('f-rev').value||'';
+  const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+  const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
+  const calLabel = (d,v) => v ? CAL[d][v-1] : 'Not given';
+
+  let lines = [];
+  lines.push(`SYPNIOS \u00b7 THE ENTERPRISE PORTRAIT`);
+  lines.push(`Company: ${company}`);
+  if(role) lines.push(`Role: ${role}`);
+  if(years) lines.push(`Years leading: ${years}`);
+  if(rev) lines.push(`Revenue range: ${rev}`);
+  lines.push(`Date: ${dateStr}`);
+  lines.push('');
+
+  let currentMov = null;
+  STEPS.forEach((s,i)=>{
+    const mov = MOVEMENTS[s.m];
+    if(mov.n !== currentMov){
+      currentMov = mov.n;
+      lines.push('');
+      lines.push(`--- Movement ${mov.n} \u00b7 ${mov.name} ---`);
+    }
+    if(s.type==='q'){
+      lines.push(`Q: ${s.text}`);
+      lines.push(`A: ${answers[i] ? answers[i] : '(no response recorded)'}`);
+    } else if(s.type==='lean'){
+      const val = s.m===2 ? leanEarly : leanLate;
+      lines.push(`Q: ${s.prompt}`);
+      lines.push(`A: ${leanLabel(val)}`);
+    } else if(s.type==='cal'){
+      lines.push(`Q: ${s.prompt}`);
+      lines.push(`A: ${calLabel(s.dim, scores[s.dim])}`);
+    }
+    lines.push('');
+  });
+
+  return { company, role, years, rev, text: lines.join('\n') };
+}
+
+async function submitToFormspree(){
+  const data = buildPlainTextTranscript();
+  const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
+  try{
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _subject: `Enterprise Portrait COMPLETED: ${data.company}`,
+        status: 'Completed',
+        company: data.company,
+        role: data.role,
+        years_leading: data.years,
+        revenue_range: data.rev,
+        direction_early: leanLabel(leanEarly),
+        direction_late: leanLabel(leanLate),
+        all_questions_and_responses: data.text
+      })
+    });
+    return res.ok;
+  }catch(e){
+    console.error('Formspree submission error:', e);
+    return false;
+  }
+}
+
+async function finish(){
+  go('s-loading');
+  const ok = await submitToFormspree();
+  go('s-readout');
+  if(!ok){
+    const note = document.getElementById('submit-warning');
+    if(note) note.style.display = 'block';
+  }
+}
+
+function printTranscript(){
+  const built = buildPlainTextTranscript();
+  const company = built.company;
+  const role = built.role;
+  const years = built.years;
+  const rev = built.rev;
   const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 
   const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
