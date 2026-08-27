@@ -716,6 +716,44 @@ function bandFor(x){
 // ============================================================
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/meajyzko';
 
+// ============================================================
+// SUPABASE (secondary backup, mirrors the Leadership Portrait's
+// pattern). Fires independently alongside Formspree, one row per
+// person, updated at each checkpoint rather than three separate rows.
+// ============================================================
+const SUPABASE_URL = 'https://owhvgxvdcuxrkuuxqjbh.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93aHZneHZkY3V4cmt1dXhxamJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyNTY0MjUsImV4cCI6MjA5MzgzMjQyNX0.cOBewnhSvsKsgM7N5OT0NS4HgkgeJyXt8n8y8Wlcjis';
+
+async function supabaseInsert(row){
+  try{
+    await fetch(`${SUPABASE_URL}/rest/v1/enterprise_portrait_responses`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(row)
+    });
+  }catch(e){ console.error('Supabase insert error:', e); }
+}
+
+async function supabaseUpdate(refCode, fields){
+  try{
+    await fetch(`${SUPABASE_URL}/rest/v1/enterprise_portrait_responses?reference_code=eq.${encodeURIComponent(refCode)}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(fields)
+    });
+  }catch(e){ console.error('Supabase update error:', e); }
+}
+
 // One reference code per session, included on every submission so
 // the Started / Part One / Completed emails can always be matched
 // back to the same person even if a name gets typed slightly
@@ -754,6 +792,19 @@ function submitStarted(){
       revenue_range: c.rev
     })
   }).catch(e => console.error('Formspree start-notification error:', e));
+
+  // Independent second path, does not depend on Formspree succeeding
+  supabaseInsert({
+    reference_code: REF_CODE,
+    status: 'Started, not yet completed',
+    first_name: c.fname,
+    last_name: c.lname,
+    email: c.email,
+    company: c.company,
+    role: c.role,
+    years_leading: c.years,
+    revenue_range: c.rev
+  });
 }
 
 function goToJourney(){
@@ -810,33 +861,69 @@ async function submitPartOneComplete(){
   const data = buildPlainTextTranscript();
   const c = getContact();
   const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
-  try{
-    await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        _subject: `Enterprise Portrait PART ONE COMPLETE: ${data.company}`,
-        status: 'Part One complete (spoken conversation). Part Two (financials) not yet started.',
-        reference_code: REF_CODE,
-        first_name: c.fname,
-        last_name: c.lname,
-        email: c.email,
-        company: data.company,
-        role: data.role,
-        years_leading: data.years,
-        revenue_range: data.rev,
-        direction_early: leanLabel(leanEarly),
-        direction_late: leanLabel(leanLate),
-        all_questions_and_responses: data.text
-      })
-    });
-  }catch(e){ console.error('Formspree Part One submission error:', e); }
+
+  const formspreePromise = fetch(FORMSPREE_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      _subject: `Enterprise Portrait PART ONE COMPLETE: ${data.company}`,
+      status: 'Part One complete (spoken conversation). Part Two (financials) not yet started.',
+      reference_code: REF_CODE,
+      first_name: c.fname,
+      last_name: c.lname,
+      email: c.email,
+      company: data.company,
+      role: data.role,
+      years_leading: data.years,
+      revenue_range: data.rev,
+      direction_early: leanLabel(leanEarly),
+      direction_late: leanLabel(leanLate),
+      all_questions_and_responses: data.text
+    })
+  }).catch(e => console.error('Formspree Part One submission error:', e));
+
+  const supabasePromise = supabaseUpdate(REF_CODE, {
+    status: 'Part One complete (spoken conversation). Part Two (financials) not yet started.',
+    first_name: c.fname,
+    last_name: c.lname,
+    email: c.email,
+    company: data.company,
+    role: data.role,
+    years_leading: data.years,
+    revenue_range: data.rev,
+    direction_early: leanLabel(leanEarly),
+    direction_late: leanLabel(leanLate),
+    transcript: data.text,
+    updated_at: new Date().toISOString()
+  });
+
+  await Promise.allSettled([formspreePromise, supabasePromise]);
 }
 
 async function submitToFormspree(){
   const data = buildPlainTextTranscript();
   const c = getContact();
   const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
+
+  // Fires independently, does not affect the returned ok/fail used
+  // for the on-screen warning, which stays tied to Formspree, the
+  // primary path.
+  const supabasePromise = supabaseUpdate(REF_CODE, {
+    status: 'Completed (both parts)',
+    first_name: c.fname,
+    last_name: c.lname,
+    email: c.email,
+    company: data.company,
+    role: data.role,
+    years_leading: data.years,
+    revenue_range: data.rev,
+    direction_early: leanLabel(leanEarly),
+    direction_late: leanLabel(leanLate),
+    transcript: data.text,
+    financial_responses: buildFinancialText(),
+    updated_at: new Date().toISOString()
+  });
+
   try{
     const res = await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST',
@@ -858,9 +945,11 @@ async function submitToFormspree(){
         financial_responses: buildFinancialText()
       })
     });
+    await supabasePromise.catch(()=>{});
     return res.ok;
   }catch(e){
     console.error('Formspree submission error:', e);
+    await supabasePromise.catch(()=>{});
     return false;
   }
 }
