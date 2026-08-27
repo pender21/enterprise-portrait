@@ -130,6 +130,7 @@
   .assess-progress i{display:block;height:100%;background:var(--gold);width:0;transition:width .4s}
   .assess-header{position:fixed;top:71px;left:0;right:0;z-index:57;background:rgba(250,248,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 32px;display:flex;justify-content:space-between;align-items:baseline}
   #s-assess{padding-top:130px}
+  #s-fin{padding-top:130px}
   @media print{ .topbar,.noprint,.assess-progress,.assess-header{display:none!important} .screen{display:block!important;min-height:auto;padding:0} body{background:#fff} }
 </style>
 </head>
@@ -147,9 +148,20 @@
     <h1 class="display">The Enterprise<br><em>Portrait</em></h1>
     <div class="rule"></div>
     <p class="lead" style="max-width:640px;margin:0 auto">Before we look at what you have built, we want to understand where it stands, and where you once hoped it would be.</p>
+
     <div style="height:34px"></div>
-    <button class="btn" onclick="go('s-why')">Begin the Portrait &nbsp;→</button>
-    <div class="meta">Voice-enabled · 9 Movements · ~30 Minutes</div>
+    <div class="grid g2" style="max-width:560px;margin:0 auto;text-align:left">
+      <div class="promise">
+        <div class="t">Part One</div>
+        <div class="d">Nine movements, a spoken conversation. About 30 minutes. Voice-enabled.</div>
+      </div>
+      <div class="promise">
+        <div class="t">Part Two</div>
+        <div class="d">Six financial questions, typed. About 10 to 15 minutes. Having your recent numbers nearby helps.</div>
+      </div>
+    </div>
+    <div style="height:30px"></div>
+    <button class="btn" onclick="go('s-why')">I'm ready to begin Part One &nbsp;→</button>
     <p class="footnote" style="margin-top:26px">Companion to the Leadership Portrait. The Leadership Portrait reveals the person; the Enterprise Portrait reveals what they built.</p>
   </div>
 </section>
@@ -165,10 +177,11 @@
     <p class="body" style="max-width:720px;margin:0 auto 6px">We wanted that same experience for the business you have spent years building.</p>
     <p class="body" style="max-width:720px;margin:0 auto">Most tools that look at a business start with a balance sheet. This one starts with a story. What you once hoped this business would become. What actually happened. Where you feel stuck today. The numbers matter, and we will get to them, but they are not the entry point. You are.</p>
     <div class="quote" style="max-width:720px;margin:26px auto">"This is not a pitch, and it is not a form. It is a conversation with a team that wants to walk alongside you, whichever direction you choose next."</div>
-    <div class="grid g3" style="margin-top:14px">
+    <div class="grid g4" style="margin-top:14px">
       <div class="promise"><div class="t">Inspired by the Leadership Portrait</div><div class="d">Same care, same mechanism, now turned toward what you have built rather than who you are.</div></div>
       <div class="promise"><div class="t">Built for honesty, not performance</div><div class="d">We would rather hear the true six than a polished eight.</div></div>
       <div class="promise"><div class="t">A door, not a verdict</div><div class="d">Every answer opens the next conversation. None of them close one.</div></div>
+      <div class="promise"><div class="t">Not a warm-up, it's the kickstart</div><div class="d">This is the Entry Gate, the first real artifact of the engagement, and it shapes everything that follows it.</div></div>
     </div>
     <div class="center" style="margin-top:34px"><button class="btn" onclick="go('s-before')">Continue &nbsp;→</button></div>
   </div>
@@ -205,16 +218,22 @@
 
 <section id="s-setup" class="screen">
   <div class="wrap" style="width:100%;max-width:640px">
-    <div class="center"><div class="kicker">Step 1 of 2 · The Business</div>
+    <div class="center"><div class="kicker">Step 1 of 2 · Before We Begin</div>
       <h2 class="sec" style="margin-top:12px">Tell us about <em>the business</em></h2><div class="rule"></div></div>
     <div class="card">
+      <div class="movtag" style="margin-bottom:2px">Who's completing this today?</div>
+      <label class="fld">First name</label><input class="fld" id="f-fname" placeholder="First name">
+      <label class="fld">Last name</label><input class="fld" id="f-lname" placeholder="Last name">
+      <label class="fld">Email address</label><input class="fld" id="f-email" type="email" placeholder="you@company.com">
+      <div style="height:14px"></div>
+      <div class="movtag" style="margin-bottom:2px">About the business</div>
       <label class="fld">Company / Organization</label><input class="fld" id="f-company" placeholder="What people call your company">
       <label class="fld">Your role</label><input class="fld" id="f-role" placeholder="Owner, CEO, President…">
       <label class="fld">Years leading this business</label><input class="fld" id="f-years" type="number" min="0" placeholder="e.g. 12">
       <label class="fld">Approx. annual revenue (optional)</label>
       <select class="fld" id="f-rev"><option value="">Prefer not to say</option><option>Under $2M</option><option>$2M – $5M</option><option>$5M – $10M</option><option>$10M – $25M</option><option>$25M – $50M</option><option>$50M+</option></select>
     </div>
-    <p class="footnote">You'll speak your answers aloud from here. We listen and write down what you say, then reflect it back &mdash; nothing is recorded on video.</p>
+    <p class="footnote">This happens in two parts. First, a spoken conversation, nothing is recorded on video, we just listen and write down what you say. Then a short set of typed questions about the numbers. About 30 minutes for the first part, 10 to 15 minutes for the second.</p>
     <div class="center" style="margin-top:20px"><button class="btn" onclick="goToJourney()">Continue &nbsp;→</button></div>
   </div>
 </section>
@@ -230,6 +249,12 @@
       <div class="movtag">Before You Press Begin</div>
       <div class="serif" style="font-size:22px;color:var(--navy);font-weight:600;margin:6px 0 10px">Give yourself the room this deserves.</div>
       <p class="body" style="font-size:15px">Find a place where you will not be interrupted. Silence what you can. This tends to take thirty to forty-five minutes, though there is no clock running and no reason to rush. The slower, more honest answers are usually the ones worth having.</p>
+    </div>
+    <div class="card" style="margin-top:18px;max-width:720px;margin-left:auto;margin-right:auto;text-align:center;border-color:rgba(139,184,74,0.5);background:rgba(139,184,74,0.05)">
+      <div class="movtag">One Last Thing</div>
+      <p class="body" style="font-size:15px;margin-top:8px">We live in a world built for efficiency, for being on time, for being quick. Here, we're asking you to do the opposite.</p>
+      <p class="serif" style="font-size:20px;color:var(--navy);font-weight:600;margin:14px 0">Slow down. Long-winded is the idea. The more you say, the more we have to work with.</p>
+      <p class="body" style="font-size:15px;margin:0">You are not being graded on how fast or how polished you sound. If you misspeak, that's fine, we can always clean it up later. Just be honest.</p>
     </div>
     <div class="center" style="margin-top:30px"><button class="btn" onclick="startAssessment()">I am ready to begin &nbsp;→</button></div>
   </div>
@@ -254,6 +279,44 @@
   </div>
 </section>
 
+<section id="s-parttwo-intro" class="screen">
+  <div class="wrap" style="max-width:640px">
+    <div class="center">
+      <div style="width:52px;height:52px;border-radius:50%;background:rgba(139,184,74,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 22px">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5 9-10" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="kicker">Part One Complete</div>
+      <h2 class="sec" style="margin-top:12px">We feel we have gotten to know<br>the business.</h2>
+      <div class="rule"></div>
+    </div>
+    <p class="body" style="max-width:560px;margin:0 auto">Your conversation has already been sent to your Sypnios advisor and safely saved, whatever happens from here. What follows is a short second part: six typed questions about the numbers, revenue, financing, and ownership. Rough estimates are completely fine wherever you don't have an exact figure on hand.</p>
+    <div class="card" style="margin-top:18px;max-width:560px;margin-left:auto;margin-right:auto">
+      <div class="movtag" style="margin-bottom:10px">What to Have Nearby</div>
+      <ul style="list-style:none;display:grid;gap:12px;margin:0 0 14px">
+        <li style="display:flex;gap:12px;align-items:flex-start"><span style="color:var(--gold);font-weight:600">✓</span><span>Your most recent Profit &amp; Loss statement</span></li>
+        <li style="display:flex;gap:12px;align-items:flex-start"><span style="color:var(--gold);font-weight:600">✓</span><span>A recent tax return, if you have one on hand</span></li>
+      </ul>
+      <p style="font-size:13px;color:var(--muted);font-style:italic;margin:0">Don't have these in front of you? Your best estimate is completely fine, nothing here needs to be exact.</p>
+    </div>
+    <div style="border:1px solid rgba(201,145,95,0.4);background:rgba(201,145,95,0.06);padding:20px 24px;margin-top:24px;text-align:left">
+      <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:#a06a3f;font-weight:600;margin-bottom:10px">One Honest Note</div>
+      <p style="font-size:14px;line-height:1.85;color:#43413b;font-weight:300;margin:0">This second part cannot be paused and resumed later. If you need to stop now, that's completely fine, the conversation you just had is already safe with your advisor, but the six questions below will need to be completed in one sitting, usually ten to fifteen minutes, whenever you're ready to begin them.</p>
+    </div>
+    <div class="center" style="margin-top:30px"><button class="btn" onclick="startFinancials()">Continue to Part Two &nbsp;→</button></div>
+  </div>
+</section>
+
+<section id="s-fin" class="screen">
+  <div class="assess-progress"><i id="fin-prog-bar"></i></div>
+  <div class="assess-header">
+    <div class="movtag" id="fin-tag" style="margin:0">Part Two &middot; Business Numbers</div>
+    <div class="meta" id="fin-step-count" style="margin:0">Question 1 of 6</div>
+  </div>
+  <div class="wrap" style="width:100%">
+    <div id="fin-body"></div>
+  </div>
+</section>
+
 <section id="s-readout" class="screen">
   <div class="wrap" style="width:100%;max-width:640px">
     <div class="center">
@@ -271,7 +334,7 @@
       <p style="font-size:13.5px;line-height:1.7;color:#7a5230;margin:0">We were unable to confirm delivery to your advisor just now. Please use the Save / Print button below to keep a copy, and let your advisor know directly just in case.</p>
     </div>
 
-    <div class="quote center" style="max-width:560px;margin:32px auto">"Thank you for the courage it took to answer honestly. What you have shared here is not just information, it is the beginning of the plan to grow this business, or to prepare it for exit, for everything it is worth."</div>
+    <div class="quote center" style="max-width:560px;margin:32px auto">"Thank you for the courage it took to answer honestly. What you have shared here is the Entry Gate of our work together, not just information, but the first real artifact this entire engagement gets built on."</div>
 
     <div class="center" style="margin-top:34px">
       <button class="btn gold" onclick="printTranscript()">↓ Save / Print Your Responses</button>
@@ -308,7 +371,7 @@ const WEIGHTS = {
   unsure:{financial:.225,team:.20, governance:.15, systems:.175,market:.20, aspiration:.05}
 };
 const CAL = {
-  financial:["Rebuilding clarity","Getting there","Clean monthly view","Strong & consistent","Audit-ready & strong"],
+  financial:["In the weeds, if I'm honest","Getting there","Clean monthly view","Strong & consistent","Audit-ready & strong"],
   team:["It stops without me","Wobbles badly","Holds with gaps","Runs with light touch","Deep bench, runs itself"],
   governance:["Almost all in my head","Mostly in my head","Some is captured","Much is documented","Documented, real rhythm"],
   systems:["Runs on heroics","Fragile at scale","Core processes documented","Mostly repeatable","Repeatable & scalable"],
@@ -323,18 +386,19 @@ const STEPS = [
   Q(2,"Looking back at what you just described, how close is the business today to the one you set out to build? What's the biggest surprise along the way?"),
   {type:'lean', m:2, prompt:"Right now, held loosely, the next chapter feels more like...",
     options:[["grow","Building something bigger"],["sell","Handing something on"],["unsure","Honestly, not sure yet"]]},
-  Q(3,"Roughly, what does the business bring in, and what does it keep?"),
-  Q(3,"If your biggest customer walked tomorrow, how big is the hole?"),
+  Q(3,"Roughly, what does the business bring in, and what does it keep after covering costs?"),
+  Q(3,"If your biggest customer walked tomorrow, how big is the hole, in whatever sense that hits you?"),
   {type:'cal', m:3, dim:'financial', prompt:"When you look at your numbers, how clear and strong is the picture?"},
   Q(4,"Who are the people this business simply could not lose?"),
   {type:'cal', m:4, dim:'team', prompt:"If you stepped away for ninety days, how would the business hold?"},
   Q(5,"When a big decision comes up, how does it actually get made? How much of 'how things work here' lives only in your head?"),
+  Q(5,"When you dreamed of what this business would become, you probably didn't picture being buried under a stack of daily projects, no room left to actually dream, to vision cast, to think past the next fire. If that's where you are, what's the biggest thing pulling you into the day to day, the stuff that keeps you working in the business instead of on it?"),
   {type:'cal', m:5, dim:'governance', prompt:"How much of how things work lives only in your head?"},
   Q(6,"What runs like clockwork here, and what runs on heroics? If you doubled in size next year, what breaks first?"),
   {type:'cal', m:6, dim:'systems', prompt:"If you doubled next year, how ready are your systems?"},
   Q(7,"Where's the biggest opportunity you haven't had the time or capital to chase?"),
   {type:'cal', m:7, dim:'market', prompt:"How much runway and edge does the business have ahead?"},
-  Q(8,"Having walked through all this, are you more energized to build, or more ready to hand it on?"),
+  Q(8,"Having walked through all this, are you more energized to build, or more ready to hand it on? And whichever way you're leaning, what's the fear sitting underneath it, the thing that would make you hold on too long, or let go too soon?"),
   {type:'lean', m:8, prompt:"Having walked through it all, where do you land now?",
     options:[["grow","More energized to build"],["sell","More ready to hand it on"],["unsure","Still holding both"]]},
   {type:'cal', m:8, dim:'aspiration', prompt:"Right now, how clear and congruent is your direction?"},
@@ -379,7 +443,7 @@ function renderStep(){
   const step=STEPS[idx];
   const mov=MOVEMENTS[step.m];
   document.getElementById('mov-tag').textContent=`Movement ${mov.n} · ${mov.name}`;
-  document.getElementById('step-count').textContent=`Step ${idx+1} of ${STEPS.length}`;
+  document.getElementById('step-count').textContent=`Movement ${mov.n} of 9`;
   document.getElementById('prog-bar').style.width=((idx)/(STEPS.length-1)*100)+'%';
   const body=document.getElementById('step-body');
 
@@ -406,8 +470,8 @@ function renderStep(){
 
       ${isLast ? `
       <div style="border:1px solid rgba(139,184,74,0.4);background:rgba(139,184,74,0.06);padding:20px 24px;margin-bottom:28px;">
-        <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;">Final Question. Almost There</div>
-        <p style="font-size:14px;line-height:1.85;color:#43413b;font-weight:300;margin:0;">You are about to move to the final screen. Once you click <strong style="color:var(--navy);font-weight:500;">Reveal my Portrait</strong>, your Sypnios advisor receives what you have shared, and you will be able to save or print all of your dictated responses for your own records.</p>
+        <div style="font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;">Final Question of Part One</div>
+        <p style="font-size:14px;line-height:1.85;color:#43413b;font-weight:300;margin:0;">Once you click <strong style="color:var(--navy);font-weight:500;">Continue to Part Two</strong>, this conversation is sent to your Sypnios advisor and safely saved, whatever happens next. A short set of typed questions about the numbers follows, usually ten to fifteen minutes.</p>
       </div>` : ''}
       <div class="q-text">${step.text}</div>
       <div class="record-box">
@@ -432,13 +496,13 @@ function renderStep(){
           <button id="bClear" onclick="clearResponse()" style="display:${hasResponse?'flex':'none'}">Clear</button>
           <button id="bSkip" onclick="nextStep()">Skip</button>
           <button id="bNext" onclick="nextStep()" style="display:${hasResponse?'flex':'none'}">
-            ${isLast?'Reveal my Portrait':'Next Question'}
+            ${isLast?'Continue to Part Two':'Next Question'}
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none" style="margin-left:0"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>` : `
         <div class="ctrls">
           ${idx>0?'<button class="btn ghost" onclick="prevStep()">← Back</button>':''}
-          <button class="btn" id="next-btn" onclick="nextStep()">${isLast?'Reveal my Portrait →':'Next →'}</button>
+          <button class="btn" id="next-btn" onclick="nextStep()">${isLast?'Continue to Part Two →':'Next →'}</button>
         </div>`}
       </div>
       ${idx>0 && speechSupported() ? '<div style="margin-top:16px"><button class="recbtn-back" onclick="prevStep()" style="background:none;border:none;color:var(--muted);font-family:Jost,sans-serif;font-size:13px;cursor:pointer;text-decoration:underline">← Back</button></div>' : ''}
@@ -614,12 +678,18 @@ function stopRec(){
 
 async function nextStep(){
   if(recognizing) await stopRec();
-  if(idx>=STEPS.length-1){ finish(); return; }
+  if(idx>=STEPS.length-1){ finishPartOne(); return; }
   idx++; renderStep();
 }
 async function prevStep(){
   if(recognizing) await stopRec();
   if(idx>0){ idx--; renderStep(); }
+}
+
+async function finishPartOne(){
+  go('s-loading');
+  await submitPartOneComplete();
+  go('s-parttwo-intro');
 }
 
 function dimTo10(s){ return Math.round((((s||3)-1)/4*9+1)*10)/10; }
@@ -646,23 +716,42 @@ function bandFor(x){
 // ============================================================
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/meajyzko';
 
+// One reference code per session, included on every submission so
+// the Started / Part One / Completed emails can always be matched
+// back to the same person even if a name gets typed slightly
+// differently between screens.
+const REF_CODE = 'EP-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2,6).toUpperCase();
+
+function getContact(){
+  return {
+    fname: document.getElementById('f-fname').value||'',
+    lname: document.getElementById('f-lname').value||'',
+    email: document.getElementById('f-email').value||'',
+    company: (document.getElementById('f-company').value||'').trim(),
+    role: document.getElementById('f-role').value||'',
+    years: document.getElementById('f-years').value||'',
+    rev: document.getElementById('f-rev').value||''
+  };
+}
+
 function submitStarted(){
-  const company = (document.getElementById('f-company').value||'').trim();
-  if(!company) return; // nothing worth notifying on yet
-  const role = document.getElementById('f-role').value||'';
-  const years = document.getElementById('f-years').value||'';
-  const rev = document.getElementById('f-rev').value||'';
+  const c = getContact();
+  if(!c.company) return; // nothing worth notifying on yet
   // Fire and forget, don't hold up navigation waiting on this
   fetch(FORMSPREE_ENDPOINT, {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      _subject: `Enterprise Portrait STARTED: ${company}`,
+      _subject: `Enterprise Portrait STARTED: ${c.company}`,
       status: 'Started, not yet completed',
-      company: company,
-      role: role,
-      years_leading: years,
-      revenue_range: rev
+      reference_code: REF_CODE,
+      first_name: c.fname,
+      last_name: c.lname,
+      email: c.email,
+      company: c.company,
+      role: c.role,
+      years_leading: c.years,
+      revenue_range: c.rev
     })
   }).catch(e => console.error('Formspree start-notification error:', e));
 }
@@ -673,10 +762,11 @@ function goToJourney(){
 }
 
 function buildPlainTextTranscript(){
-  const company = (document.getElementById('f-company').value||'').trim() || 'The Business';
-  const role = document.getElementById('f-role').value||'';
-  const years = document.getElementById('f-years').value||'';
-  const rev = document.getElementById('f-rev').value||'';
+  const c = getContact();
+  const company = c.company || 'The Business';
+  const role = c.role;
+  const years = c.years;
+  const rev = c.rev;
   const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 
   const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
@@ -716,16 +806,21 @@ function buildPlainTextTranscript(){
   return { company, role, years, rev, text: lines.join('\n') };
 }
 
-async function submitToFormspree(){
+async function submitPartOneComplete(){
   const data = buildPlainTextTranscript();
+  const c = getContact();
   const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
   try{
-    const res = await fetch(FORMSPREE_ENDPOINT, {
+    await fetch(FORMSPREE_ENDPOINT, {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        _subject: `Enterprise Portrait COMPLETED: ${data.company}`,
-        status: 'Completed',
+        _subject: `Enterprise Portrait PART ONE COMPLETE: ${data.company}`,
+        status: 'Part One complete (spoken conversation). Part Two (financials) not yet started.',
+        reference_code: REF_CODE,
+        first_name: c.fname,
+        last_name: c.lname,
+        email: c.email,
         company: data.company,
         role: data.role,
         years_leading: data.years,
@@ -735,11 +830,210 @@ async function submitToFormspree(){
         all_questions_and_responses: data.text
       })
     });
+  }catch(e){ console.error('Formspree Part One submission error:', e); }
+}
+
+async function submitToFormspree(){
+  const data = buildPlainTextTranscript();
+  const c = getContact();
+  const leanLabel = v => v==='grow' ? 'Building something bigger' : v==='sell' ? 'Handing something on' : v==='unsure' ? 'Not sure yet' : 'Not given';
+  try{
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        _subject: `Enterprise Portrait COMPLETED: ${data.company}`,
+        status: 'Completed (both parts)',
+        reference_code: REF_CODE,
+        first_name: c.fname,
+        last_name: c.lname,
+        email: c.email,
+        company: data.company,
+        role: data.role,
+        years_leading: data.years,
+        revenue_range: data.rev,
+        direction_early: leanLabel(leanEarly),
+        direction_late: leanLabel(leanLate),
+        all_questions_and_responses: data.text,
+        financial_responses: buildFinancialText()
+      })
+    });
     return res.ok;
   }catch(e){
     console.error('Formspree submission error:', e);
     return false;
   }
+}
+
+// ============================================================
+// PART TWO: THE SIX FINANCIAL QUESTIONS
+// ============================================================
+const FIN_STEPS = [
+  {
+    id:'revenue', type:'text',
+    q:"What was your total revenue over the last 12 months?",
+    def:"The total money that came in from sales over the past year, before any expenses are taken out.",
+    find:"Usually found at the top of your Profit & Loss statement (sometimes called an Income Statement), labeled \u201cTotal Revenue\u201d or \u201cTotal Sales.\u201d",
+    placeholder:"$4.2M, or your best estimate"
+  },
+  {
+    id:'ebitda', type:'text',
+    q:"Roughly, what does the business keep after covering its normal costs?",
+    def:"In plain language: what's left over after the normal costs of running the business, before interest, taxes, and non-cash accounting items are subtracted. Sometimes called EBITDA. Basically, the cash the business actually generates in a typical year.",
+    find:"Start with your Net Income (bottom of your P&L), then add back interest expense, taxes, and depreciation listed above it. A rough estimate is completely fine.",
+    placeholder:"$800K, or your best estimate"
+  },
+  {
+    id:'concentration', type:'select',
+    q:"Roughly what share of last year's revenue came from your single largest customer?",
+    def:"How reliant the business is on any one customer, if they left tomorrow.",
+    find:"Your accounting software's sales-by-customer report (QuickBooks and similar tools have this built in) will show this if you want an exact figure, but a rough read is fine.",
+    options:["Under 10%","10% to 25%","25% to 50%","Over 50%"]
+  },
+  {
+    id:'trend', type:'select_follow',
+    q:"Compared to last year, has revenue grown, stayed flat, or declined?",
+    def:"How this year's total sales compare to last year's.",
+    find:"Compare the \u201cTotal Revenue\u201d line on this year's P&L to last year's P&L.",
+    options:["Grown","Stayed about flat","Declined"],
+    followFor:["Grown","Declined"],
+    followPrompt:"Roughly by how much?",
+    followPlaceholder:"About 15%, or your best sense of it"
+  },
+  {
+    id:'financing', type:'select_follow2',
+    q:"How is the business financed today?",
+    def:"Whether the business runs on your own money, borrowed money, outside investors, or some mix.",
+    find:"Loans and lines of credit typically show up under \u201cLiabilities\u201d on your Balance Sheet. Outside ownership would be in your operating agreement or cap table, if you have one.",
+    options:["Self-funded","A bank loan or line of credit","Outside investors","A combination of these"],
+    follow2Prompt:"Did you personally guarantee any of that, meaning your own assets are on the line if the business couldn't pay it back?",
+    follow2Options:["Yes","No","Not sure"]
+  },
+  {
+    id:'ownership', type:'select_follow',
+    q:"Are you the sole owner, or do others hold a real stake in the business?",
+    def:"Whether anyone else, partners, family, investors, legally owns part of the business alongside you.",
+    find:"Found in your operating agreement, articles of incorporation, or partnership agreement, wherever ownership percentages are documented.",
+    options:["I'm the sole owner","Other people have a real stake"],
+    followFor:["Other people have a real stake"],
+    followPrompt:"Roughly how many people, and what's the split?",
+    followPlaceholder:"e.g., 2 partners, 60/40"
+  }
+];
+
+let finIdx = 0;
+const finAnswers = {}; // id -> { value, follow, follow2 }
+
+function startFinancials(){
+  finIdx = 0;
+  go('s-fin');
+  renderFinStep();
+}
+
+function renderFinStep(){
+  const step = FIN_STEPS[finIdx];
+  const saved = finAnswers[step.id] || {};
+  document.getElementById('fin-tag').textContent = `Part Two \u00b7 Business Numbers`;
+  document.getElementById('fin-step-count').textContent = `Question ${finIdx+1} of ${FIN_STEPS.length}`;
+  document.getElementById('fin-prog-bar').style.width = ((finIdx)/(FIN_STEPS.length-1)*100)+'%';
+
+  const defBox = `
+    <div style="border:1px solid rgba(139,184,74,0.4);background:rgba(139,184,74,0.06);padding:18px 22px;margin:18px 0">
+      <div style="font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:8px">In Plain Language</div>
+      <p style="font-size:14px;line-height:1.75;color:#43413b;font-weight:300;margin:0 0 10px">${step.def}</p>
+      <p style="font-size:12.5px;line-height:1.6;color:var(--muted);margin:0"><strong style="color:#726d63">Where to find it:</strong> ${step.find}</p>
+    </div>`;
+
+  let inputHtml = '';
+  if(step.type === 'text'){
+    inputHtml = `<input class="fld" id="fin-input" type="text" placeholder="${step.placeholder}" value="${saved.value ? saved.value.replace(/"/g,'&quot;') : ''}" style="font-family:'Cormorant Garamond',serif;font-size:19px">`;
+  } else if(step.type === 'select'){
+    inputHtml = `<div class="optlist" id="fin-optlist">${step.options.map(o=>
+      `<button class="opt ${saved.value===o?'sel':''}" onclick="pickFinOpt('${o.replace(/'/g,"\\'")}')">${o}</button>`
+    ).join('')}</div>`;
+  } else if(step.type === 'select_follow'){
+    const showFollow = step.followFor.includes(saved.value);
+    inputHtml = `<div class="optlist" id="fin-optlist">${step.options.map(o=>
+      `<button class="opt ${saved.value===o?'sel':''}" onclick="pickFinOpt('${o.replace(/'/g,"\\'")}')">${o}</button>`
+    ).join('')}</div>
+    <div id="fin-follow-wrap" style="margin-top:14px;display:${showFollow?'block':'none'}">
+      <label class="fld">${step.followPrompt}</label>
+      <input class="fld" id="fin-follow" type="text" placeholder="${step.followPlaceholder}" value="${saved.follow||''}">
+    </div>`;
+  } else if(step.type === 'select_follow2'){
+    inputHtml = `<div class="optlist" id="fin-optlist">${step.options.map(o=>
+      `<button class="opt ${saved.value===o?'sel':''}" onclick="pickFinOpt('${o.replace(/'/g,"\\'")}')">${o}</button>`
+    ).join('')}</div>
+    <div style="margin-top:20px">
+      <label class="fld">${step.follow2Prompt}</label>
+      <div class="optlist" id="fin-optlist2">${step.follow2Options.map(o=>
+        `<button class="opt ${saved.follow2===o?'sel':''}" onclick="pickFinOpt2('${o.replace(/'/g,"\\'")}')">${o}</button>`
+      ).join('')}</div>
+    </div>`;
+  }
+
+  document.getElementById('fin-body').innerHTML = `
+    <div class="q-card">
+      <p class="footnote" style="text-align:left;margin:0 0 6px">These are common terms, but your own financials might use slightly different labels. Your best estimate is always fine.</p>
+      <div class="q-text">${step.q}</div>
+      ${defBox}
+      ${inputHtml}
+      <div class="ctrls" style="margin-top:24px">
+        ${finIdx>0 ? '<button class="btn ghost" onclick="finPrev()">\u2190 Back</button>' : ''}
+        <button class="btn" id="fin-next-btn" onclick="finNext()">${finIdx===FIN_STEPS.length-1?'Finish \u2192':'Next \u2192'}</button>
+      </div>
+      ${finIdx===FIN_STEPS.length-1 ? '<p style="text-align:center;margin-top:18px"><button class="btn ghost" onclick="printTranscript()" style="font-size:13px;padding:10px 20px">\u2193 Save a copy of my responses now, just in case</button></p>' : ''}
+    </div>`;
+
+  if(step.type === 'text'){
+    document.getElementById('fin-input').addEventListener('input', e=>{
+      finAnswers[step.id] = { value: e.target.value };
+    });
+  }
+  const followInput = document.getElementById('fin-follow');
+  if(followInput){
+    followInput.addEventListener('input', e=>{
+      const cur = finAnswers[step.id] || {};
+      cur.follow = e.target.value;
+      finAnswers[step.id] = cur;
+    });
+  }
+}
+
+function pickFinOpt(val){
+  const step = FIN_STEPS[finIdx];
+  const cur = finAnswers[step.id] || {};
+  cur.value = val;
+  finAnswers[step.id] = cur;
+  renderFinStep();
+}
+function pickFinOpt2(val){
+  const step = FIN_STEPS[finIdx];
+  const cur = finAnswers[step.id] || {};
+  cur.follow2 = val;
+  finAnswers[step.id] = cur;
+  renderFinStep();
+}
+
+function finNext(){
+  if(finIdx >= FIN_STEPS.length-1){ finish(); return; }
+  finIdx++; renderFinStep();
+}
+function finPrev(){
+  if(finIdx > 0){ finIdx--; renderFinStep(); }
+}
+
+function buildFinancialText(){
+  let lines = [];
+  FIN_STEPS.forEach(step=>{
+    const a = finAnswers[step.id] || {};
+    lines.push(`Q: ${step.q}`);
+    lines.push(`A: ${a.value ? a.value : '(not answered)'}`);
+    if(step.type==='select_follow' && a.follow) lines.push(`   ${step.followPrompt} ${a.follow}`);
+    if(step.type==='select_follow2' && a.follow2) lines.push(`   ${step.follow2Prompt} ${a.follow2}`);
+    lines.push('');
+  });
+  return lines.join('\n');
 }
 
 async function finish(){
@@ -781,6 +1075,15 @@ function printTranscript(){
     }
   });
 
+  let finSections = `<h3 style="font-family:'Cormorant Garamond',serif;color:#1e3a0f;font-size:20px;margin:28px 0 10px;border-bottom:1px solid #ddd;padding-bottom:6px">Part Two &middot; Business Numbers</h3>`;
+  FIN_STEPS.forEach(step=>{
+    const a = finAnswers[step.id] || {};
+    let val = a.value ? a.value.replace(/</g,'&lt;') : '<span style="color:#999">Not answered</span>';
+    if(step.type==='select_follow' && a.follow) val += ` (${a.follow.replace(/</g,'&lt;')})`;
+    if(step.type==='select_follow2' && a.follow2) val += `. Personal guarantee: ${a.follow2}`;
+    finSections += `<div style="margin-bottom:18px"><div style="font-weight:600;color:#333;margin-bottom:4px">${step.q}</div><div style="color:#444">${val}</div></div>`;
+  });
+
   const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Enterprise Portrait — ${company}</title>
   <style>body{font-family:Georgia,serif;max-width:720px;margin:40px auto;padding:0 20px;color:#222}
   .hdr{border-bottom:2px solid #1e3a0f;padding-bottom:16px;margin-bottom:24px}
@@ -799,6 +1102,7 @@ function printTranscript(){
       </div>
     </div>
     ${sections}
+    ${finSections}
     <p style="margin-top:40px;font-size:12px;color:#888;border-top:1px solid #ddd;padding-top:16px">Confidential. Prepared for the named business and their Sypnios advisor.</p>
   </body></html>`;
 
