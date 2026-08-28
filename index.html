@@ -983,10 +983,10 @@ const FIN_STEPS = [
   },
   {
     id:'ebitda', type:'text',
-    q:"Roughly, what does the business keep after covering its normal costs?",
-    def:"In plain language: what's left over after the normal costs of running the business, before interest, taxes, and non-cash accounting items are subtracted. Sometimes called EBITDA. Basically, the cash the business actually generates in a typical year.",
-    find:"Start with your Net Income (bottom of your P&L), then add back interest expense, taxes, and depreciation listed above it. A rough estimate is completely fine.",
-    placeholder:"$800K, or your best estimate"
+    q:"Before any loan payments come out, roughly what does the business keep after its normal operating costs?",
+    def:"In plain language: what's left over after the normal costs of running the business, before any loan payments, taxes, and non-cash accounting items like depreciation are subtracted. Sometimes called EBITDA. This should not have loan payments taken out yet, that's a separate question next.",
+    find:"Start with your Net Income (bottom of your P&L), then add back interest expense, taxes, and depreciation listed above it. If you're not sure whether loan payments are already subtracted, use the number from before they come out. A rough estimate is completely fine.",
+    placeholder:"$800K (before loan payments), or your best estimate"
   },
   {
     id:'concentration', type:'select',
