@@ -79,6 +79,10 @@
   .q-movement-label { font-size: 12px; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; font-weight: 500; margin-bottom: 6px; }
   .q-number { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: var(--line); line-height: 1; margin-bottom: -16px; letter-spacing: -0.05em; }
   .q-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(21px, 3.2vw, 28px); font-weight: 400; color: var(--ink); line-height: 1.55; margin-bottom: 36px; letter-spacing: -0.01em; }
+  .not-recording-banner{background:#152a0c;border:2px solid var(--gold);border-radius:8px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:flex-start;gap:14px}
+  .not-recording-banner svg{flex-shrink:0;margin-top:2px}
+  .not-recording-banner .nrb-title{font-weight:700;font-size:14px;color:#fff;letter-spacing:.01em;margin-bottom:3px}
+  .not-recording-banner .nrb-text{font-size:12.5px;color:#c9d9bb;line-height:1.5}
   .record-box { background: var(--paper); border: 1px solid var(--line); padding: 28px; position:relative; overflow:hidden }
   .rec-status { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; position:relative; z-index:1 }
   .rec-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); flex-shrink: 0; transition: background 0.3s; }
@@ -205,11 +209,52 @@
     </div>
     <div class="center" style="margin-top:40px"><div class="kicker">What to Expect</div></div>
     <div class="card" style="margin-top:14px;max-width:720px;margin-left:auto;margin-right:auto">
-      <ul style="list-style:none;display:grid;gap:14px">
-        <li style="display:flex;gap:12px;align-items:flex-start"><span style="color:var(--gold);font-weight:600">✓</span><span>Nothing is recorded on video or audio. As you speak, your words are turned to text right in your own browser.</span></li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><span style="color:var(--gold);font-weight:600">✓</span><span>Nothing is saved automatically while you go. Give yourself a quiet, uninterrupted stretch of time so you are not starting over.</span></li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><span style="color:var(--gold);font-weight:600">✓</span><span>You are never locked in. Every question lets you re-record, add more, or clear it and start again.</span></li>
-        <li style="display:flex;gap:12px;align-items:flex-start"><span style="color:var(--gold);font-weight:600">✓</span><span>At the end, save or print your Portrait. That copy is yours to keep, so hold onto it.</span></li>
+      <ul style="list-style:none;display:grid;gap:16px">
+        <li style="display:flex;gap:14px;align-items:flex-start">
+          <svg width="26" height="22" viewBox="0 0 26 22" fill="none" style="flex-shrink:0;margin-top:2px">
+            <rect x="2" y="1" width="7" height="11" rx="3.5" stroke="#8bb84a" stroke-width="1.6"/>
+            <path d="M1 10a4.5 4.5 0 0 0 9 0" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+            <line x1="5.5" y1="14.5" x2="5.5" y2="17" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M12 10h3" stroke="#8bb84a" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M13.5 8.3l1.7 1.7-1.7 1.7" stroke="#8bb84a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="18" y1="5" x2="26" y2="5" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+            <line x1="18" y1="10" x2="26" y2="10" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+            <line x1="18" y1="15" x2="23" y2="15" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span>Nothing is recorded on video or audio. As you speak, your words are turned to text right in your own browser.</span>
+        </li>
+        <li style="display:flex;gap:14px;align-items:flex-start">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex-shrink:0;margin-top:2px">
+            <circle cx="11" cy="11" r="9" stroke="#8bb84a" stroke-width="1.6"/>
+            <path d="M11 6v5l3.5 2" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Nothing is saved automatically while you go. Give yourself a quiet, uninterrupted stretch of time so you are not starting over.</span>
+        </li>
+        <li style="display:flex;gap:14px;align-items:flex-start">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex-shrink:0;margin-top:2px">
+            <path d="M4 11a7 7 0 0 1 12-5" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M16 3v4h-4" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 11a7 7 0 0 1-12 5" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M6 19v-4h4" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>You are never locked in. Every question lets you re-record, add more, or clear it and start again.</span>
+        </li>
+        <li style="display:flex;gap:14px;align-items:flex-start">
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style="flex-shrink:0;margin-top:2px">
+            <path d="M6 8V3h8v5M4 8h12a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-2v3H6v-3H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z" stroke="#8bb84a" stroke-width="1.4" stroke-linejoin="round"/>
+            <rect x="6" y="12" width="8" height="5" stroke="#8bb84a" stroke-width="1.4"/>
+          </svg>
+          <span>At the end, save or print your Portrait. That copy is yours to keep, so hold onto it.</span>
+        </li>
+        <li style="display:flex;gap:14px;align-items:flex-start">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex-shrink:0;margin-top:2px">
+            <rect x="2" y="3" width="18" height="14" rx="2" stroke="#8bb84a" stroke-width="1.6"/>
+            <line x1="2" y1="7" x2="20" y2="7" stroke="#8bb84a" stroke-width="1.6"/>
+            <circle cx="5" cy="5" r="0.6" fill="#8bb84a"/>
+            <circle cx="7.5" cy="5" r="0.6" fill="#8bb84a"/>
+          </svg>
+          <span>This works best in <strong style="color:var(--navy)">Google Chrome</strong>. Speech-to-text may not function correctly in other browsers.</span>
+        </li>
       </ul>
     </div>
     <div class="center" style="margin-top:34px"><button class="btn" onclick="go('s-setup')">I am ready, continue &nbsp;→</button></div>
@@ -252,9 +297,7 @@
     </div>
     <div class="card" style="margin-top:18px;max-width:720px;margin-left:auto;margin-right:auto;text-align:center;border-color:rgba(139,184,74,0.5);background:rgba(139,184,74,0.05)">
       <div class="movtag">One Last Thing</div>
-      <p class="body" style="font-size:15px;margin-top:8px">We live in a world built for efficiency, for being on time, for being quick. Here, we're asking you to do the opposite.</p>
-      <p class="serif" style="font-size:20px;color:var(--navy);font-weight:600;margin:14px 0">Slow down. Long-winded is the idea. The more you say, the more we have to work with.</p>
-      <p class="body" style="font-size:15px;margin:0">You are not being graded on how fast or how polished you sound. If you misspeak, that's fine, we can always clean it up later. Just be honest.</p>
+      <p class="serif" style="font-style:italic;font-size:20px;color:var(--navy);line-height:1.5;margin-top:12px">Slow down. Long-winded is the idea. The more you say, the more we have to work with.<br><br>If you misspeak, that's fine, we can always clean it up later. Just be honest.</p>
     </div>
     <div class="center" style="margin-top:30px"><button class="btn" onclick="startAssessment()">I am ready to begin &nbsp;→</button></div>
   </div>
@@ -413,6 +456,9 @@ const STEPS = [
   Q(6,"What runs like clockwork here, and what runs on heroics? If you doubled in size next year, what breaks first?"),
   {type:'cal', m:6, dim:'systems', prompt:"If you doubled next year, how ready are your systems?"},
   Q(7,"Where's the biggest opportunity you haven't had the time or capital to chase?"),
+  Q(7,"How much real competition are you up against, does this feel like a crowded field, or is there more room here than people assume?"),
+  Q(7,"If you were willing to make a real stretch, even something that seemed like it didn't belong, what would you add to make this ten times bigger, not twice as big?"),
+  Q(7,"Is there a piece of what you do, a service, a job type, a kind of customer, that's smaller by volume but brings in outsized profit compared to everything else? What is it?"),
   {type:'cal', m:7, dim:'market', prompt:"How much runway and edge does the business have ahead?"},
   Q(8,"Having walked through all this, are you more energized to build, or more ready to hand it on? And whichever way you're leaning, what's the fear sitting underneath it, the thing that would make you hold on too long, or let go too soon?"),
   {type:'lean', m:8, prompt:"Having walked through it all, where do you land now?",
@@ -521,6 +567,23 @@ function renderStep(){
           <button class="btn" id="next-btn" onclick="nextStep()">${isLast?'Continue to Part Two →':'Next →'}</button>
         </div>`}
       </div>
+      ${speechSupported() ? `
+      <div class="not-recording-banner">
+        <svg width="30" height="26" viewBox="0 0 30 26" fill="none">
+          <rect x="3" y="3" width="7" height="11" rx="3.5" stroke="#8bb84a" stroke-width="1.6"/>
+          <path d="M2 12a4.5 4.5 0 0 0 9 0" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="6.5" y1="16.5" x2="6.5" y2="19" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M13 12h3" stroke="#8bb84a" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M14.5 10.3l1.7 1.7-1.7 1.7" stroke="#8bb84a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="19" y1="7" x2="27" y2="7" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="19" y1="12" x2="27" y2="12" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="19" y1="17" x2="24" y2="17" stroke="#8bb84a" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <div class="nrb-title">Voice to Text Notice</div>
+          <div class="nrb-text">Your voice is not being recorded. This is dictation only, as you speak, your words appear as text on the screen above. If you do not see text appearing there, nothing has been captured. We do not save or store audio or video. Only the written text you see is submitted.</div>
+        </div>
+      </div>` : ''}
       ${idx>0 && speechSupported() ? '<div style="margin-top:16px"><button class="recbtn-back" onclick="prevStep()" style="background:none;border:none;color:var(--muted);font-family:Jost,sans-serif;font-size:13px;cursor:pointer;text-decoration:underline">← Back</button></div>' : ''}
     </div>`;
     if(speechSupported()){ setBtnState(hasResponse ? 'has-response' : 'idle'); }
@@ -576,7 +639,7 @@ function setBtnState(state){
     if(L) L.textContent='Stop Recording';
     if(A) A.style.display='none'; if(C) C.style.display='none'; if(S) S.style.display='none'; if(N) N.style.display='none';
     if(dot){ dot.classList.remove('done'); dot.classList.add('recording'); }
-    if(status) status.textContent='Recording, speak clearly and take your time...';
+    if(status) status.textContent='Converting your speech to text now, nothing is being recorded.';
     if(wf) wf.classList.add('on');
   } else if(state==='has-response'){
     R.classList.remove('rec');
